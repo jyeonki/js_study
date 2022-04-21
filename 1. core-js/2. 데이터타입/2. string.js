@@ -26,3 +26,32 @@ console.log(str5);
 
 var str6 = '멍멍이\t\t\t야옹이';
 console.log(str6);
+
+var ex1 = '100' // ''안에 감싸져 있으니까 숫자가 아닌 문자!!
+
+// '\n' 줄바꿈 문자, 문자이므로 ''안에 넣어서 써야한다
+
+
+
+// 템플릿 리터럴 (ES6+ 문법)
+var tag = '<ul>\n\t<li>\n\t\t<a href="#">목록1</a>\n\t</li>\n</ul>';
+console.log(tag);
+
+var template = `
+<ul>
+    <li>
+        <a href="#"목록1</a>
+    <li>
+<ul>`; // `백틱 써야함
+console.log(template);
+
+// 이름이랑 영어점수를 같이 쓰고 싶을 때
+// 학생이 여러명 일 경우..
+
+var studentName = '박영희';
+var engScore = '94'
+
+console.log(studentName + '님의 영어점수는 ' + engScore + '점입니다.');
+
+// console.log('${}님의 영어점수는 ${}점입니다.');
+console.log(`${studentName}님의 영어점수는 ${engScore}점입니다.`); // `백틱 써야함(템플릿 리터럴), 
