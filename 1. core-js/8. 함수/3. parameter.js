@@ -68,3 +68,16 @@ sayHello('중국어');
 sayHello('히브리어');
 sayHello();
 
+
+// 매개변수가 없는 함수
+function selectRandomPet() {
+    var pets = ['멍멍이', '야옹이', '짹짹이', '어흥이', '두껍이'];
+    // 0부터 4까지의 랜덤정수
+    var rn = Math.floor(Math.random() * pets.length);
+    return pets[rn];
+}
+
+console.log(`선택된 동물: ${selectRandomPet()}`);
+
+// 변수들을 return을 안하면 함수 안의 변수를 외부에서 쓸 수 없다
+
