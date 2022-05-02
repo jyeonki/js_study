@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul>
+        <li id="apple">사과</li>
+        <li id="banana">바나나</li>
+        <li id="grape">포도</li>
+        <li id="pineapple">파인애플</li>
+    </ul>
+
+    <script>
+
+        // body태그의 객체
+        // console.log(document.body);
+
+        // html태그의 객체
+        // console.log(document.documentElement);
+
+        // id속성으로 요소 노드 취득
+        const $banana = document.getElementById('banana');
+        console.log($banana.style);
+
+        $banana.textContent = '뻐네너';
+
+        $banana.style.color = 'red';
+        $banana.style.backgroundColor = 'yellow';
+
+        // id속성이 부여된 요소는 해당 아이디가 자동으로 전역변수로 등록됨.
+        // let grape = '뽀도도';
+        grape.textContent = '맛있는 포도';
+
+    </script>
+
+</body>
+</html>

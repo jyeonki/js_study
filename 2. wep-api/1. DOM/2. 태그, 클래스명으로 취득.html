@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul>
+        <li id="apple">사과</li>
+        <li id="banana">바나나</li>
+        <li id="grape">포도</li>
+        <li id="pineapple">파인애플</li>
+    </ul>
+
+    <ul id="vegitable">
+        <li>당근</li>
+        <li>양파</li>
+        <li>피망</li>
+    </ul>
+
+    <script>
+
+        const $elems = document.getElementsByTagName('li');
+        
+        // const nums = [1, 2, 3, 4, 5];
+        console.log($elems.__proto__);
+
+        console.log($elems[0]);
+        console.log(`elems의 길이: ${$elems.length}`); // 유사배열
+
+        $elems[2].style.background = 'violet';
+        $elems.grape.style.width = 'fit-content';
+
+    </script>
+
+</body>
+</html>
