@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li>사과</li>
+        <li>바나나</li>
+        <li>포도</li>
+        <li>망고</li>
+    </ul>
+
+    <script>
+
+        // 배열 디스트럭쳐링(구조분해 할당 ES6+)
+        const foods = ['라면', '오렌지', '치킨'];
+        
+        const [ramen, orange, chicken] = foods;
+        /*
+        const ramen = foods[0];
+        const orange = foods[1];
+        const chicken = foods[2];
+        */
+
+
+        const $fruits = document.getElementById('fruits');
+
+        const [$apple, $banana, $grape, $mango] = $fruits.children;
+
+        // 노드 이동
+        $fruits.insertBefore($banana, $mango);
+        // 화면에 이미 그려져잇는 건 이동을 한다(바나나는 이미 그려져있다), 새로운 건 추가
+
+        // 맨 끝으로 이동
+        $fruits.appendChild($grape);
+
+        
+    </script>
+
+</body>
+</html>

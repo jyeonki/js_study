@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- .wrap>ul#fruits>li.apple*3 -->
+    <div class="wrap">
+        <ul id="fruits">
+            <li class="apple">사과</li>
+            <li class="banana">바나나</li>
+            <li class="grape">포도</li>
+        </ul>
+    </div>
+
+    <!-- table#board>tr*2>td*2 -->
+    <table id="board">
+        <tr>
+            <td>A</td>
+            <td>B</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>D</td>
+        </tr>
+    </table>
+
+
+    <script>
+
+        // 노드 탐색의 기준요소 취득
+        const $fruits = document.querySelector('#fruits');
+
+        // 부모탐색
+        const $wrap = $fruits.parentElement;
+        console.log($wrap);
+
+        const $banana = $fruits.children[1];
+        console.log($banana.parentElement);                             // 바나나의 부모 ul
+        console.log($banana.parentElement.lastElementChild);            // 바나나의 부모의 마지막 자식 grape
+        console.log($banana.parentElement.parentElement);               // 바나나의 부모의 부모 div
+        console.log($banana.parentElement.parentElement.parentElement); // 바나나의 부모의 부모의 부모 body
+
+
+        console.log('=========================================================================');
+
+
+        // 다음 형제노드 탐색
+        console.log($banana.nextElementSibling);
+
+        // 이전 형제노드 탐색
+        console.log($banana.previousElementSibling);
+
+
+        console.log('=========================================================================');
+
+
+        /*
+            table 태그 주의사항
+
+            - table태그의 자식태그는 무조건 자동으로 tbody가 적용되므로 주의할 것!
+        */
+        const $board = document.getElementById('board');
+        console.log($board.firstElementChild.lastElementChild.lastElementChild);
+
+    </script>
+
+</body>
+</html>

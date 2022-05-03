@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li>사과</li>
+        <li>딸기</li>
+        <li>자몽</li>
+        <li>라임</li>
+        <li>레몬</li>
+        <li>바나나</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+        const $mango = $fruits.firstElementChild.cloneNode(); // 안에 비워져있으면 얕은 복사(false)
+        $mango.textContent = '망고';
+
+        //노드 교체 (사과 -> 망고)
+        $fruits.replaceChild($mango, $fruits.firstElementChild);
+
+        //노드 삭제
+        $fruits.removeChild($fruits.lastElementChild);
+
+        //노드 전체삭제 함수 정의
+        // $parentNode: 삭제될 자식들의 부모
+        function removeAllChild($parentNode) {
+
+            while (!!$parentNode.children.length) {
+                $parentNode.removeChild($parentNode.firstElementChild);
+            }
+
+            // for (let i = $parentNode.children.length-1; i >= 0; i--) {
+            //     $parentNode.removeChild($parentNode.children[i]);
+            // }
+        }
+
+        removeAllChild($fruits);
+    </script>
+
+
+ 
+    </script>
+
+
+</body>
+</html>

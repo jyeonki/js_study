@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <ul id="fruits">
+        <li class="apple">
+           <a href="">사과</a> 
+        </li>
+    </ul>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+
+        // 사과 li 요소노드를 취득
+        const $apple = $fruits.firstElementChild;
+
+        // apple의 사본 (얕은 복사: 자기 자신 요소노드만 복제)
+        const $shallow = $apple.cloneNode(false);
+        console.log($shallow);
+
+        // apple의 사본 (깊은 복사: 자기 자신 포함 모든 후손노드를 복제)
+        const $deep = $apple.cloneNode(true);
+        console.log($deep);
+
+    </script>
+</body>
+</html>

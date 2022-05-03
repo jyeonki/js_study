@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>사과</li>
+    </ul>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+        
+        function appendNewLi(fName) {
+            //1. 새로운 요소노드를 생성
+            // <li></li>
+            const $newLi = document.createElement('li');
+
+            //2. 생성된 노드에 텍스트 추가
+            // <li>바나나</li>
+            $newLi.textContent = fName;
+
+            //3. 새로운 노드를 추가
+            $fruits.appendChild($newLi);
+        }
+
+        /*
+        appendNewLi('바나나');
+        appendNewLi('복숭아');
+        appendNewLi('포도');
+        appendNewLi('딸기');
+        appendNewLi('수박');
+        appendNewLi('참외');
+        appendNewLi('멜론');
+        appendNewLi('파인애플');
+        appendNewLi('자몽');
+        */
+
+        const fruitArr = ['바나나', '복숭아', '포도', '딸기', '수박', '참외', '멜론', '파인애플', '자몽'];
+
+        for (let txt of fruitArr) {
+            appendNewLi(txt);
+        }
+
+        // <li><a>레몬</a></li>
+
+        // li태그 생성
+        const $li = document.createElement('li');
+        // a태그 생성
+        const $a = document.createElement('a');
+        $a.textContent = '레몬';
+
+        // li의 자식으로 a를 추가
+        $li.appendChild($a); // virtual + virtual
+
+        // ul의 자식으로 li를 추가
+        $fruits.appendChild($li); // live + virtual
+    
+    </script>
+</body>
+
+</html>
