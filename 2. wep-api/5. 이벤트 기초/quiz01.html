@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="hider">텍스트 숨기기!!</button>
+
+    <div class="text">안녕하세요~~</div>
+
+    <script>
+        /*
+            버튼에 클릭이벤트를 등록해야겠다.
+
+            -> 클릭이벤트핸들러에는 div를 숨길 수 있는
+               어떤 장치가 필요하다.
+            -> 숨긴 이후에 버튼텍스트도 변해야한다.
+
+            -> 만약에 div가 숨어있다면 다시 눌렀을 때
+               나오게해야하며 버튼텍스트도 원래대로 변해야한다
+        */
+        const $btn = document.getElementById('hider');
+
+        $btn.onclick = function () {
+            const $text = document.querySelector('.text');
+
+            if ($text.classList.contains('hide')) {
+                $text.classList.remove('hide');
+                $btn.textContent = '텍스트 숨기기!';
+            } else {
+                $text.classList.add('hide');
+                $btn.textContent = '텍스트 보이기!';
+            }
+        };
+    </script>
+
+</body>
+
+</html>

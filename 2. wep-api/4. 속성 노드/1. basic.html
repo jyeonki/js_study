@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="email" id="account" value="abc@def.com">
+
+    <script>
+
+        const $input = document.querySelector('input');
+        console.log($input.attributes);
+        console.log($input.attributes[0]);
+        console.log($input.attributes.type);
+        console.log($input.attributes.type.value);
+
+        // $input.attributes.type.value = 'checkbox';
+        $input.attributes.id.value = 'acc';
+
+        console.log($input.attributes.value.value);
+        
+    </script>
+
+</body>
+</html>

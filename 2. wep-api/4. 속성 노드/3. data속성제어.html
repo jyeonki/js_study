@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul class="users">
+        <li data-user-number="4321" data-role="common">김철수</li>
+        <li data-user-number="9999" data-role="admin">박영희</li>
+    </ul>
+
+    <script>
+
+        const $users = document.querySelector('.users')
+        // const [$li1, $li2] = $users.children; // children은 자식들을 모아놓은 유사배열
+        const [$li1, $li2] = [...$users.children]; // 배열
+        
+        console.log($li1.dataset);
+        console.log($li1.dataset.role);
+        console.log($li2.dataset.userNumber);
+
+        $li2.dataset.role = 'common';
+
+        // 김철수 li태그에 data-user-address 속성 추가
+        $li1.dataset.userAddress = '서울시 중구';
+
+        // data-user-address 삭제
+        delete $li1.dataset.userAddress;
+
+
+
+
+        // html - document.documentElement
+        // body - document.body
+        
+    </script>
+
+</body>
+</html>

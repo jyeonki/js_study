@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="user-name" value="홍길동">
+
+    <script>
+
+        const $input = document.querySelector('input');
+        // const $input = document.getElementById('user-name'); // 둘다 가능
+
+        // 홍길동 참조
+        const username = $input.getAttribute('value');
+        // const username = $input.attributes.value.value;      // 둘다 가능
+
+        console.log(username);
+
+        // id값 참조
+        const inputId = $input.getAttribute('id');
+        console.log(inputId);
+
+        // 속성값 변경
+        // value속성의 값을 홍길동 -> 박영희
+        
+        // $input.attributes.value.value = '박영희';
+        $input.setAttribute('value', '박영희');       // 둘다 가능
+
+        // id속성값을 user-name -> member-name
+        $input.setAttribute('id', 'member-name');
+
+        // 속성값 추가
+        $input.setAttribute('title', '이름입니다.'); // 없는 속성을 적으면 추가가 됨
+        $input.setAttribute('placeholder', '이름은 한글로 쓰세요');
+
+        // 속성값 제거
+        // $input.attribute.value.value = '';
+        $input.removeAttribute('value');            // 둘다 가능
+
+        // document.body.removeChild($input); // input태그 제거
+
+        // 속성 존재 유무 확인
+        const logical = $input.hasAttribute('class');
+        // const logical = $input.hasAttribute('type');
+        console.log(logical);
+
+    </script>
+
+</body>
+</html>

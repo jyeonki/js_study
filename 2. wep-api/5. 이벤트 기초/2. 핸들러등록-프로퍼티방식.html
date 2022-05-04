@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+     <button id="b1">클릭1~</button>
+     <button id="b2">클릭2~</button>
+     <button id="b3">클릭3~</button>
+
+    <script>
+
+        let $buttonGroup = document.querySelectorAll('button');
+        $buttonGroup = [...$buttonGroup];
+        
+        const $b1 = $buttonGroup[0];
+        const $b2 = $buttonGroup[1];
+        const $b3 = $buttonGroup[2];
+        
+
+        // const [$b1, $b2, $b3] = [...document.querySelectorAll('button')]; // 위에거랑 같은 코드, 한 줄로 표현 가능
+
+        $b1.onclick = function() {
+            alert('안녕하세요~~~')
+        };
+
+        const sayHello = function() {
+            alert('안녕하세요~~~');
+        };
+
+        $b1.onclick = sayHello;
+        $b2.onclick = sayHello;
+
+        $b3.onmouseenter = () => {
+            $b3.style.background = 'red';
+        };
+        $b3.onmouseleave = () => {
+            $b3.style.background = 'yellow';
+        };
+
+        // 프로퍼티방식은 동일한 타입의 이벤트에서 
+        // 다른 핸들러를 등록할 경우 기존이 핸들러가 사라짐.
+        $b3.onmouseleave = () => {
+            alert('안녕~~~ 잘가요!!');
+        }
+
+        // 이벤트 핸들러 제거
+        $b3.onmouseleave = null;
+
+        const kim = {
+            stuNum: 11,
+            name: '김철수',
+            grade: 3,
+            hobby: ['축구', '영어'],
+            major: null,
+            study: function() {
+                console.log('열심히 공부합시다');
+            },
+        }
+
+        console.log(kim.grade);
+        kim.study(); // return이 없으면 단독실행, 다른데 쓰면 안됨
+
+        kim.grade = 4;
+        kim.study = function() {
+            console.log('열심히 공부할까???');
+        };
+
+        kim.study();
+
+    </script>
+</body>
+</html>
