@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 20px;
+            border: 2px solid red;
+        }
+
+        #fruits li {
+            width: 100px;
+            background: orange;
+            margin-right: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li data-number="1" id="apple" class="active">Apple</li>
+        <li data-number="2" id="banana">Banana</li>
+        <li data-number="3" id="grape">Grape</li>
+    </ul>
+
+    <div>선택된 과일: <em class="msg">Apple</em></div>
+    
+    <form action="#">
+        <label>
+            # 새로운 과일 추가하기:
+            <input type="text" class="text-box">
+            <button id="add">추가</button>
+        </label>
+    </form> <!-- form으로 작성하면 enter키 작동 -->
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        // 이벤트 핸들러 함수 정의
+        function activate(e) {
+
+            // # ul을 클릭하면 이하의 코드를 작동시키면 안됨
+
+            // $elementNode.matches('css selector')
+            // 해당 선택자에 맞는 요소면 true, 아니면 false
+            if (!e.target.matches('#fruits > li')) {
+                return; // 나가라!
+            }
+
+
+            // 1. 클릭대상을 제외한 li태그에 있는 class = active 제거
+            // 1-1. ul의 모든 자식 가져오기
+            // const $liList = $fruits.children
+            const $liList = [...$fruits.children]; // 유사배열 진짜배열로 바꿔주기
+            console.log($liList);
+
+            // 1-2. 모든 li를 순회하여 class = active 탐색
+            for (let $li of $liList) {
+                if ($li.classList.contains('active')) {
+                    $li.classList.remove('active');
+                    break;
+                }
+            }
+
+            // 2. 클릭 대상에 class = active를 부여
+            e.target.classList.add('active')
+
+            // 3. 클릭한 li태그의 텍스트를 복사하여 em태그에 텍스트로 수정
+            const $em = document.querySelector('.msg');
+            $em.textContent = e.target.textContent;
+        }
+        // const [$a, $b, $g] = [...$fruits.children];
+        // $a.onclick = activate;
+        // $b.onclick = activate;
+        // $g.onclick = activate;
+
+        /*
+            모든 요소에 이벤트 핸들러를 일일히 바인딩하면
+            새로운 요소가 동적으로 추가되었을 때 또다시 핸들러를 붙여줘야하는 문제가 생김
+
+            - 자식요소들의 이벤트 핸들러가 동일한 내용이라면
+            차라리 부모요소에 1번만 핸들러를 바인딩하여
+            자식요소들에게 전파해서 사용하면 성능최적화에 도움이 됨
+        */
+
+        // 이벤트 핸들러 바인딩
+        // for (let $li of [...$fruits.children]) {
+        //     $li.onclick = activate;
+        // }
+
+        // 부모요소에 이벤트 부여 후 버블링을 이용
+        $fruits.onclick = activate;
+
+
+
+    /*        
+        // 1. 과일을 li에 추가한다
+
+        const $input = document.querySelector('input')
+
+        const $btn = document.getElementById('add');
+        
+        function add1(e) {
+            const $newLi = document.createElement('li')
+            const inputText = $input.value;
+            $newLi.textContent = inputText;
+            $fruits.insertBefore($newLi, $fruits.lastChild);
+
+        }
+        $btn.onclick = add1;
+
+        // 2. 추가된 과일에도 class = active는 부여되어야한다  
+    */    
+
+
+        // 풀이
+
+        // 1. 추가버튼에 클릭이벤트 부여
+
+        const $addBtn = document.getElementById('add');
+        
+        // 리터럴        
+        const makeNewLi = e => {
+
+            /*
+                # data-number 추가하기
+                현재 상태의 마지막 li요소의 data-number값을 확인해서
+                +1된 값을 새롭게 추가 될 li에 부여한다
+            */
+            const curLastNumber = $fruits.lastElementChild.dataset.number;
+
+
+            console.log('추가버튼 클릭!');
+            // 2-1. li태그를 생성하여 input에 기록한 텍스트를 li태그의 텍스트로 삽입
+            const $newLi = document.createElement('li');
+            const $input = document.querySelector('.text-box');
+            $newLi.textContent = $input.value;
+
+            // newLi에 data-number 추가
+            $newLi.dataset.number = +curLastNumber + 1; // string이므로 숫자변환
+
+            // 2-2. li태그에 해당 텍스트를 아이디로 부여
+            $newLi.setAttribute('id', $newLi.textContent.toLowerCase());
+
+            // 3. ul에 생성한 li를 추가 
+            $fruits.appendChild($newLi);
+            
+            // 4. input의 텍스트 초기화
+            $input.value = '';
+
+        };
+        $addBtn.onclick = makeNewLi;
+
+        </script>
+</body>
+
+</html>

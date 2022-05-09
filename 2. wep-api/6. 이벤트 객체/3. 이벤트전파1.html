@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            width: 250px;
+            padding: 50px;
+            border: 2px solid red;
+        }
+        #fruits li {
+            background: greenyellow;
+            margin-bottom: 10px;
+        }
+        #fruits li:first-child {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="fruits">
+        <li class="apple">Apple</li>
+        <li class="banana">Banana</li>
+        <li class="grape">Grape</li>
+        <li class="mango">Mango</li>
+    </ul>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+
+        $fruits.onclick = e => {
+            console.log('ul태그에서 클릭이벤트 발생!');
+            // console.log(e);
+            console.log('실제로 이벤트가 발생한 요소:', e.target);
+            console.log('이벤트핸들러가 바인딩 된 요소:', e.currentTarget);
+
+        };
+
+        $fruits.firstElementChild.onclick = e => {
+            console.log('li.apple에서 클릭이벤트 발생!');
+            
+        };
+
+    </script>
+</body>
+</html>

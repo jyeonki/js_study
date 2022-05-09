@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>아무 곳이나 클릭하세요!</p>
+    <em class="msg"></em>
+
+    <script>
+
+        document.addEventListener('click', function(hello) {
+            console.log('클릭이벤트 발생!');
+            console.log(hello.x);
+            console.log(hello.y);
+
+            const $msg = document.querySelector('msg');
+            $msg.textContent = `x: ${hello.x}, y:${hello.y}`}
+
+        });
+
+    </script>
+
+</body>
+</html>

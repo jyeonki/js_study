@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .link2 {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <a href="https://www.naver.com" class="link">네이버 링크</a>
+
+    <!-- <div class="link2">구글 링크</div> -->
+
+    <form action="/hello">
+        <input type="text" name="ttt">
+        <button id="check" type="button">확인</button>
+    </form>
+
+    <script>
+        /*
+        const $link2 = document.querySelector('.link2');
+        $link2.onclick = e => {
+            location.href = 'https://www.google.com'
+        }
+        */
+
+        // confirm(message): 브라우저 전용 함수
+        // 알림창을 띄워서 message를 보여준 후
+        // 확인 취소 선택지를 주고 확인을 누르면 true 리턴
+        // 취소를 누르면 false 리턴
+
+        // const answer = confirm('안녕하십니까?')
+        // console.log(answer);
+
+        const $link = document.querySelector('.link')
+        $link.onclick = e => {
+            if (!confirm('네이버로 이동합니까?')) {
+                // 취소를 눌렀을 때 실행할 코드
+                e.preventDefault(); // 태그의 기본 기능 중단
+            }
+        }
+
+        // submit 버튼 이벤트
+        const $subBtn = document.getElementById('check');
+        $subBtn.onclick = e => {
+            // 확인버튼을 눌렀을 때 입력값을 먼저 검증하겠다.
+            e.preventDefault();
+            
+            const $input = $subBtn.previousElementSibling;
+            if ($input.value === ' ') {
+                alert('필수입력사항입니다~~'); 
+                return;
+            }
+            //  서버로 데이터 전송
+            const $form = $subBtn.parentElement;
+            $form.submit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+    </script>
+
+</body>
+</html>

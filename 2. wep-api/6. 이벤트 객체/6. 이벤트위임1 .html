@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 20px;
+            border: 2px solid red;
+        }
+        #fruits li {
+            width: 100px;
+            background: orange;
+            margin-right: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple" class="active">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <p>선택된 과일: <em class="msg">Apple</em></p>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+
+        // 이벤트 핸들러 함수 정의
+        function activate(e) {
+
+            // # ul을 클릭하면 이하의 코드를 작동시키면 안됨
+            
+            // $elementNode.matches('css selector')
+            // 해당 선택자에 맞는 요소면 true, 아니면 false
+            if (!e.target.matches('#fruits > li')) {
+                return; // 나가라!
+            }
+
+
+            // 1. 클릭대상을 제외한 li태그에 있는 class = active 제거
+            // 1-1. ul의 모든 자식 가져오기
+            // const $liList = $fruits.children
+            const $liList = [...$fruits.children]; // 유사배열 진짜배열로 바꿔주기
+            console.log($liList);
+            
+            // 1-2. 모든 li를 순회하여 class = active 탐색
+            for (let $li of $liList) {
+                if ($li.classList.contains('active')) {
+                    $li.classList.remove('active');
+                    break;
+                }
+            }
+
+            // 2. 클릭 대상에 class = active를 부여
+            e.target.classList.add('active')
+
+            // 3. 클릭한 li태그의 텍스트를 복사하여 em태그에 텍스트로 수정
+            const $em = document.querySelector('.msg');
+            $em.textContent = e.target.textContent;
+            }
+            // const [$a, $b, $g] = [...$fruits.children];
+            // $a.onclick = activate;
+            // $b.onclick = activate;
+            // $g.onclick = activate;
+
+            /*
+                모든 요소에 이벤트 핸들러를 일일히 바인딩하면
+                새로운 요소가 동적으로 추가되었을 때 또다시 핸들러를 붙여줘야하는 문제가 생김
+
+                - 자식요소들의 이벤트 핸들러가 동일한 내용이라면
+                차라리 부모요소에 1번만 핸들러를 바인딩하여
+                자식요소들에게 전파해서 사용하면 성능최적화에 도움이 됨
+            */
+
+            // 이벤트 핸들러 바인딩
+            // for (let $li of [...$fruits.children]) {
+            //     $li.onclick = activate;
+            // }
+
+            // 부모요소에 이벤트 부여 후 버블링을 이용
+            $fruits.onclick = activate;
+        
+    </script>
+</body>
+</html>
