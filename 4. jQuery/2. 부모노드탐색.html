@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+
+    <style>
+        .ancestors * {
+            border: 2px solid gray;
+            color: gray;
+            padding: 20px;
+            margin: 35px;
+        }
+        .ancestors > div {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- .ancestors>div>ul>li>span -->
+    <div class="ancestors">
+        <div>div (great-grandparent)
+            <ul>ul (grandparent)
+                <li>li (direct parent)
+                    <span>span</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        $(() => {
+            const $span = $('span');
+            const $li = $span.parent();
+            // console.log($li);
+            $li.css('color', 'red')
+            $li.css('border-color', 'red')
+
+            // 직속 부모 포함 모든 조상 탐색
+            const $parentList = $span.parents();
+            // console.log($parentList);
+
+            $parentList.css('border-style', 'dashed');
+
+            // 부모 탐색 범위 제한
+            const $untilParents = $span.parentsUntil('div');
+            console.log($untilParents);
+            $untilParents.css('border-width', '4px');
+        });
+
+    </script>
+
+</body>
+
+</html>

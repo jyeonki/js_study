@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"> -->
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+</head>
+
+<body>
+
+    <!-- ul.container>li.item{item$}*5 -->
+    <ul class="container">
+        <li class="item">item1</li>
+        <li class="item">item2</li>
+        <li class="item">item3</li>
+        <li class="item">item4</li>
+        <li class="item">item5</li>
+    </ul>
+
+
+    <script>
+
+        $(() => {
+            const $ul = $('.container');
+
+            // 맨 마지막에 자식요소 추가
+            $ul.append('<li>item6</li>');
+
+            const $newLi = document.createElement('li');
+            $newLi.textContent = 'item7';
+            $ul.append($newLi);
+
+
+            // 맨 첫 위치에 자식요소 추가
+            $ul.prepend('<li>item0</li>');
+
+
+            // 이전, 다음 형제 위치에 추가
+            const $item = $ul.children().eq(2);
+            $item.css('color', 'green');
+
+            $item.after('<li>next item</li>');
+            $item.before('<li>prev item</li>');
+
+            
+            // append, prepend, after, before: 여러개 동시 추가 가능
+            const tag1 = '<li>random1</li>';
+            const tag2 = '<li>random2</li>';
+            const tag3 = '<li>random3</li>';
+
+            $ul.append(tag1, tag2, tag3);
+
+
+
+            // 자식요소 전부 제거
+            // $ul.empty('');
+
+
+            // 첫번째 li 제거
+            $ul.children().first().remove();
+
+            // 마지막 li 제거
+            $('li').last().remove();
+
+            // li 전체 제거
+            // $('li').remove();
+
+            // li중에 클래스 item인 요소 전체 삭제
+            $('li.item').remove();
+            $('li').remove('.item');
+
+        });
+
+    </script>
+</body>
+
+</html>

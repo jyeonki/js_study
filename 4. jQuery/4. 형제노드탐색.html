@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+
+    <style>
+        .ancestors * {
+            display: block;
+            border: 2px solid gray;
+            color: gray;
+            padding: 20px;
+            margin: 35px;
+        }
+        .ancestors > div {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- .ancestors>div>ul>li>span -->
+    <div class="ancestors">
+        <div class="ggp">div (great-grandparent)
+
+            <p>p</p>
+            <span>span</span>
+            <h1>h1</h1>
+            <h2>h2</h2>
+            <p>p</p>
+
+        </div>
+    </div>
+
+    <script>
+
+        $(() => {
+            // 모든 형제 탐색
+            const $siblings = $('h1').siblings();
+            $siblings.css('border-color', 'blue');
+
+            // 특정 형제 탐색
+            const $pList = $('h1').siblings('p');
+            $pList.css('color', 'red');
+
+            // 다음 형제 하나 탐색
+            const $next = $('h1').next();
+            $next.css('font-size', '2em')
+
+            // 다음 형제 모두 탐색
+            const $nexrAll = $(h1).nextAll();
+            nextAll.css('backoground', 'tomato');
+
+            // 다음 형제 탐색 범위 제한
+            const $nextUntil = $('span').nextUntil();
+            $nextUntil.css('font-weight', 'bold');
+
+
+            // 이전 형제 한 개: prev, 모두: prevAll)
+        
+        });
+
+    </script>
+
+</body>
+
+</html>

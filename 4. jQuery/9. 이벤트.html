@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"> -->
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: tomato;
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box"></div>
+
+    <button class="btn">Click</button>
+    <button class="btn2">Click2</button>
+
+    <script>
+        $('.btn').click(function(e) {
+            $('.box').css('background', 'aqua');
+        });
+
+        /*
+            화살표 함수는 this 사용 불가능
+        */
+        $('.box').mouseenter(function(e) {
+            // $('.box').css('border', '2px dashed blue');
+            // this : 나 자신 (self)
+            $(this).css('border', '2px dashed blue');
+        })
+
+        $('.btn2').on('click', e=> {
+            alert('두번째 버튼 클릭!');
+        });
+
+
+        // 이벤트 타입 여러개 부여
+        $('.box').on({
+            click: function(e) {
+                $(this).css('transform', 'rotate(45deg)');
+            },
+            dblclick: function(e) {
+                $(this).hide();
+            },
+            mouseleave: function(e) {
+                $(this).css('border-radius', '50%');
+            }
+
+        })
+    </script>
+
+
+</body>
+
+</html>

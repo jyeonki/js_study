@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+
+    <style>
+        .ancestors * {
+            border: 2px solid gray;
+            color: gray;
+            padding: 20px;
+            margin: 35px;
+        }
+        .ancestors > div {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- .ancestors>div>ul>li>span -->
+    <div class="ancestors">
+        <div class="ggp">div (great-grandparent)
+            <ul>ul (grandparent)
+                <!-- li{리스트$}*4 -->
+                <li>리스트1</li>
+                <li class="li2">리스트2</li>
+                <li>리스트3</li>
+                <li>리스트4</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        $(() => {
+            // 모든 자식 노드 탐색            
+            const $children = $('ul').children();
+            $children.css('color', ' orange');
+
+            // 특정 자식 노드 탐색
+            const $li2 = $('ul').children('.li2');
+            $li2.css('font-size', '2em');
+
+            // 후손 노드 탐색
+            const $liList = $('.ggp').find('li');
+            $liList.css('background', 'tomato');
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"> -->
+    <!-- jQuery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title></title>
+</head>
+
+<body>
+
+    <ul class="fruits">
+        <li class="red">사과</li>
+        <li>바나나</li>
+        <li>포도</li>
+        <li class="red">딸기</li>
+    </ul>
+
+    <script>
+        $(() => {
+            $('li').first().css('color', 'red');
+            $('.fruits').children().last().css('background', 'orange');
+
+            // eq(index) : index는 0번부터 시작
+            $('li').eq(1).css('font-style', 'italic');
+
+            // filter(선택자): 선택자에 해당하는 요소들
+            $('li').filter('.red').css('font-size', '1.5em');
+
+            // not(선택자): 선택자에 해당하지 않는 요소들
+            $('li').not('.red').css('border', '1px solid blue');
+        });
+
+
+    </script>
+</body>
+
+</html>
