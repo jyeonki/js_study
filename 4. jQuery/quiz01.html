@@ -52,15 +52,15 @@
     </div>
 
     <script>
-        
         $(() => {
+
             $('h1').css('color', 'red');
             $('h2').css('color', 'green');
             $('h3.nextTitle').css('color', 'blue');
 
             $('ul.obj3').children().css('font-weight', '700');
             $('ul.obj3').children('.theObj1').css('color', 'red');
-            
+
             $('li.obj4').prev().css('text-align', 'right');
             $('li.obj4').next().css('color', 'orange');
 
@@ -69,10 +69,44 @@
             $('li.obj6').prev().css('text-align', 'center');
             $('li.obj6').next().css('text-align', 'center');
 
-            $('input').css('background', 'gray');
-            $('input').css('border', '2px solid blue');
+            // $('input').css('background', 'gray');
+            // $('input').css('border', '2px solid blue');
+
+            $('input').css({
+                'background': 'gray',
+                'border': '2px solid blue'
+            });
+
 
         });
+
+        /*
+        $(() => {
+
+            $('h1').css('color', 'red');
+
+            $('#firstTitle').css('color', 'green');
+            $('.nextTitle').css('color', 'blue');
+            $('.obj3 > li').css('font-weight', 'bold');
+
+
+            $('.obj3').children('.theObj1').css('color', 'red');
+
+            // 부모 요소 탐색
+            $('.obj5').parent().css('border', '2px dashed #f00');
+
+            // 형제 요소 탐색
+            $('.obj4').next().css('color', 'orange');
+            $('.obj4').prev().css('text-align', 'right');
+            $('.obj6').siblings().css('text-align', 'center');
+
+            $('input[type=text]').css({
+                "background": "#ccc",
+                "border": "1px solid blue",
+                "color": "green"
+            });
+        });
+        */
     </script>
 
 </body>
