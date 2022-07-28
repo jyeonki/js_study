@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="register">
+        <label>
+            # 회원번호 : <input type="text" name="id">
+        </label>
+        <label>
+            # 계정명 : <input type="text" name="account">
+        </label>
+        <label>
+            # 비밀번호 : <input type="password" name="password">
+        </label>
+        <label>
+            # 이름 : <input type="text" name="userName">
+        </label>
+        <label>
+            # 주소 : <input type="text" name="address">
+        </label>
+        <label>
+            <button type="button" id="insert">회원가입</button>
+        </label>
+    </div>
+
+    <script>
+
+        const $insertBtn = document.getElementById('insert');
+
+        $insertBtn.addEventListener('click', e => {
+            
+            // POST 요청 흐름
+            const xhr = new XMLHttpRequest();
+
+            // 요청 정보 설정
+            xhr.open('POST', 'http://localhost:5000/user/');
+
+            // POST 요청은 서버로 전송할 데이터를 만들어야 한다
+            // 당연히 포맷은 JSON으로 보내야 한다.
+            const userData = {
+                id: document.querySelector('[name=id]').value, 
+                account: document.querySelector('[name=account]').value ,
+                password: document.querySelector('[name=password]').value,
+                userName: document.querySelector('[name=userName]').value,
+                address: document.querySelector('[name=address]').value
+            };
+            // console.log(userData);
+
+            //userData를 JSON으로 변환
+            const sendJSONData = JSON.stringify(userData);
+            // console.log(sendJSONData);
+
+            // 전송할 데이터의 mime type을 요청헤더 설정
+            xhr.setRequestHeader('content-type', 'application/json')
+
+            // 서버 요청 전송
+            xhr.send(sendJSONData);
+
+            xhr.onload = e => {
+                console.log(xhr.status);
+                if (xhr.status === 201) {
+                    alert('회원 가입 성공!');
+                }
+            };
+
+        });
+        
+
+
+
+
+
+    </script>
+</body>
+</html>

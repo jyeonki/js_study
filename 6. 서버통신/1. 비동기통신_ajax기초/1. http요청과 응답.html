@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        section.info {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+        .info {
+            width: 60%;
+        }
+        .detail {
+            width: 30%;
+            border: 2px dashed gray;
+            color: #444;
+            font-weight: 700;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="load">json 가상서버에서 user데이터 불러오기</button>
+
+    <!-- section.info>ul.content+(div.detail>div*3) -->
+    <section class="info">
+        <ul class="content">
+            <!-- user데이터 목록 배치 -->
+        </ul>
+        <div class="detail">
+            <div class="account">계정: <span class="acc"></span> </div>
+            <div class="name">이름: <span class="nm"></span> </div>
+            <div class="addr">주소: <span class="ad"></span> </div>
+        </div>
+    </section>
+
+
+    
+    <script>
+
+        // 서버가 응답한 정보를 화면에 렌더링
+        function makeUserListDOM(responseJsonData) {
+            /*
+                서버가 응답한 데이터는 마치 자바스크립트의 객체, 배열 형태로 보이지만 사실은 아닙니다.
+                이런 형태의 데이터를 JSON이라고 부릅니다.
+
+                JSON은 자바스크립트가 아닌 독립적 데이터 포맷이기때문에 사용하려면 자바스크립트로 변환해서 써야 합니다.
+
+                # json -> js :  JSON.parse() - 응답
+                  js -> json :  JSON.stringify() - 요청
+            */
+
+           // JSON을 자바스크립트로 변환
+           const userList = JSON.parse(responseJsonData);
+        //    console.log(userList);
+
+            const $content = document.querySelector('.content'); // ul
+
+            for (let user of userList) {
+                // li태그 생성
+                const $li = document.createElement('li');
+
+                // $li.innerHTML= `# 아이디: ${user.account}, 이름 : ${user.userName}, 주소: ${user.address}`;
+
+                const {account, userName, address, id} = user;
+                $li.innerHTML= `# 아이디: ${account}, 이름 : <a data-id=${id} class='detail-btn' href='#'>${userName}</a>, 주소: ${address}`;
+
+                $content.appendChild($li);
+            }
+
+            // 이름 상세보기 버튼 이벤트 부여
+            // const $detailBtn = document.querySelectorAll('.detail-btn');
+            // console.log($detailBtn);
+            $content.onclick = e => {
+                if (!e.target.matches('.detail-btn')) return;
+                
+                e.preventDefault(); // a 태그 기능 중지 (링크)
+
+                // 상세조회 비동기 통신 시작
+                
+                const xhr = new XMLHttpRequest();
+                const id = e.target.dataset.id;
+                xhr.open('GET', 'http://localhost:5000/user/' + id);
+
+                xhr.send();
+
+                xhr.onload = e => {
+                    
+                    console.log(xhr.response);
+
+                    if (xhr.status === 200) {                    
+                        //console.log(xhr.response);
+                        const userObj = JSON.parse(xhr.response);
+                        //console.log(userObj);
+                        const {account, userName, address} = userObj;
+
+                        document.querySelector('.acc').textContent
+                            = account;
+                        document.querySelector('.nm').textContent
+                            = userName;
+                        document.querySelector('.ad').textContent
+                            = address;
+
+                    } else {
+                        console.error('통신 실패!');
+                    }
+                }
+            };
+        };
+        
+
+        // load 버튼 노드 가져오기
+        const $loadBtn = document.getElementById("load");
+
+        
+
+        // 클릭 이벤트 부여
+        $loadBtn.onclick = e => {
+
+            // # http 요청을 서버로 보내는 방법
+            // 1. XMLHttpRequest 객체 생성
+            const xhr = new XMLHttpRequest();
+
+            // 2. http 요청 정보 설정 (요청 URI, 요청방식)
+            xhr.open('GET', 'http://localhost:5000/user');
+
+            // 3. 요청 전송
+            xhr.send();
+            
+            // 4. 응답정보 확인
+            xhr.onload = e => {
+                
+                // 응답 상태코드 확인
+                console.log(xhr.status);
+                // 응답 데이터 확인 (JSON)
+                console.log(xhr.response);
+
+                // 응답 데이터를 렌더링
+                if (xhr.status === 200) {
+
+                    makeUserListDOM(xhr.response);
+                } else {
+                    console.log('통신 실패!');
+                }
+            };
+        };
+
+
+    </script>
+
+</body>
+</html>
