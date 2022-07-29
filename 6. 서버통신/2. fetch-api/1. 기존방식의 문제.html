@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        // 비동기 get요청 처리 함수
+        function get(url) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send();
+
+            function getRespData(e) {
+                // 서버 응답 데이터를 리턴
+                console.log('server response: ',xhr.response);
+                return JSON.parse(xhr.response);
+            };
+            
+            xhr.onload = getRespData;
+        }
+
+        (function() {
+
+            const foundUser = get('http://localhost:5000/user/1');
+            const boardList = get('http://localhost:5000/board');
+
+            console.log('user:', foundUser);
+            console.log('board:', boardList);
+
+        })();
+    </script>
+
+</body>
+</html>

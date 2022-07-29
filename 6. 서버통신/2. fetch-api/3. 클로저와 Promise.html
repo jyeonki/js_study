@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function foo() {
+            // console.log('foo!!');
+
+            function bar() {
+                console.log('bar!!');
+                return '메롱';
+            }
+
+            return bar; // 함수 bar를 통째로 호출
+            // return bar(); // bar를 호출해서 return값 '메롱' 반환
+        }
+
+        const f = foo();
+        console.log(f);
+        const result = f();
+        console.log('result: ', result);
+
+
+
+        /*
+            # Promise: 비동기 통신을 할 때 상태에 따른
+              콜백함수들을 관리해주는 객체
+
+            1. 상태 (state)
+            - pending: 요청을 수행중
+            - fulfilled: 요청을 성공
+            - rejected: 요청을 실패
+
+            2. Promise객체는 2개의 콜백함수를 매개변수로 가집니다.
+            - a. resolve: 요청 성공시 처리하는 함수
+            - b. reject: 요청 실패시 처리하는 함수
+        */
+
+        function get(url) {
+            return new Promise((resolve, reject) => {
+                // 요청 처리
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                xhr.send();
+
+                xhr.onload = e => {
+                    if (xhr.status == 200) {
+                        // 요청 성공시에는 resolve 롤백을 호출
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        // 요청 실패시에는 reject를 호출
+                        reject('통신 실패!')
+                    }
+                };
+            });
+        }
+
+        (function() {
+
+            const result = get('http://localhost:5000/board');
+            console.log(result);
+
+             /*
+                - Promise 내부 데이터 소비
+                1. then(): Promise가 fulfilled(성공) 상태일 때 데이터후속처리 수행
+                2. catch(): Promise가 rejected(실패) 상태일 때 데이터후속처리 수행
+            */
+
+            result.then((boardList) => {
+                console.log('결과: ', boardList);
+            });
+
+            // promise로 콜백 지옥 해결 예시
+
+            /*
+                # 3번 게시물을 상세조회해서
+                 -> 작성자의 계정명을 알아낸 후 해당 사용자의 정보를 가져온다
+                 -> 해당 사용자의 정보를 이용해서 친구목록을 불러온다
+                 -> 그리고 선택된 친구들에게 단체쪽지를 보낸다
+            */
+            get('board/3')
+                // .then(articleInfo => {return get('/user' + articleInfo.userAccount);}) // 한줄 함수는 return과 중괄호 삭제 가능
+                .then(articleInfo => get('/user' + articleInfo.userAccount)) 
+                .then(userInfo => get('/friends').catch(err => {}))
+                .then(friendList => {
+                    // 쪽지 보내기
+                });
+
+
+            /*
+                1. 화살표 함수의 기본 문법
+                - var/let/const 함수명 = (매개변수) => {실행문}
+
+                만일 매개 변수가 하나라면, 소괄호를 생략할 수 있다. 두 개 이상일 경우에는 반드시 소괄호() 사용!
+
+                만일 함수가 하나의 실행문만을 가지고 있다면, 중괄호를 생략하고 한 줄에 표기할 수 있다. 이 경우, 실행문의 결과가 함수의 반환값이 된다.
+
+                2. 기본적으로 화살표함수는 익명 함수로만 사용할 수 있기 때문에, 함수를 호출하기 위해서는 표현식으로 써야한다.
+                - 익명함수: 함수를 재사용하지 않을 목적으로 함수에 이름을 붙이지 않는 것
+            */    
+
+        }) ();
+
+
+
+    </script>
+</body>
+</html>
